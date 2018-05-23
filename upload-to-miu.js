@@ -1,5 +1,6 @@
 #!/usr/bin/node
 const request = require("request");
+const guid = require("uuid/v4")
 const fs = require("fs");
 const os = require("os");
 const child_process = require("child_process");
@@ -20,6 +21,11 @@ function MiuUploadFile(path) {
         }, (error, res, body) => {
             var responseJson = JSON.parse(body);
             child_process.spawn("notify-send", ["Miniature Image Uploader", `URL: ${responseJson.file}`]);
+            console.log(`Uploaded! URL: ${responseJson.file}`);
+            let tempFileWUrl = fs.createWriteStream(`/tmp/screenshot-${guid()}.txt`);
+            tempFileWUrl.write(`${responseJson.file}\n`);
+            tempFileWUrl.end();
+            let clipboardMgrProcess = child_process.spawn("xclip", [tempFileWUrl.path]);
         });
     });
 }
