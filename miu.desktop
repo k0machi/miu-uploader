@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=MIU
+GenericName=Image Uploader
+Comment=Upload images to i.komachi.sh
+
+Type=Application
+Categories=Utility
+Icon=/usr/share/icons/Adwaita/scalable/apps/utilities-terminal-symbolic.svg
+Exec=/home/komachi/bin/miupload %u
+StartupNotify=false
+Terminal=false
