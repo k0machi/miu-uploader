@@ -1,5 +1,18 @@
 #!/bin/bash
 set -eo pipefail
+
+usage() {
+    cat <<USAGE
+usage: miupload file1 [file2] [file3] ...
+
+USAGE
+}
+
+upload() {
+    local file="$1"
+    curl -sS -F meowfile_remote=@"$file" -F private_key="$TOKEN" https://i.komachi.sh/getfile/ | jq .file -r
+}
+
 TOKEN=$(cat ~/.miukey || printf "err")
 IFS=$'\n\t'
 if [[ $# -gt 1 ]]; then
@@ -8,7 +21,9 @@ if [[ $# -gt 1 ]]; then
             echo "File not found: $file"
             continue
         fi
-        URL=$(curl -sS -F meowfile_remote=@$file -F private_key="$TOKEN" https://i.komachi.sh/getfile/ | jq .file -r)
+
+        URL=$(upload "$file")
+
         if [[ -n "$DISPLAY" ]]; then
             notify-send "File Uploaded" "$URL"
         else
@@ -21,7 +36,7 @@ elif [[ -n "$1" ]]; then
         echo "File not found: $1"
         exit
     fi
-    URL=$(curl -sS -F meowfile_remote=@"$1" -F private_key="$TOKEN" https://i.komachi.sh/getfile/ | jq .file -r)
+    URL=$(upload "$1")
     if [[ -n "$DISPLAY" ]]; then
         printf "%s" "$URL" | xclip -selection clipboard
         notify-send "File Uploaded" "$URL"
@@ -29,5 +44,5 @@ elif [[ -n "$1" ]]; then
         printf '%s\n' "$URL"
     fi
 else
-    echo "No files to upload"
+    usage
 fi
