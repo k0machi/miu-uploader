@@ -4,8 +4,8 @@ GenericName=Image Uploader
 Comment=Upload images to i.komachi.sh
 
 Type=Application
-Categories=Utility
-Icon=/usr/share/icons/Adwaita/scalable/apps/utilities-terminal-symbolic.svg
-Exec=/home/komachi/bin/miupload %u
+Categories=Graphics
+Icon=miu
+Exec=miupload %u
 StartupNotify=false
 Terminal=false
