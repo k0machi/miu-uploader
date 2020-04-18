@@ -13,4 +13,5 @@ This small shell script handles uploading files to [MIU](https://i.komachi.sh), 
 1. Clone the repository
 2. Run make
 3. Make sure your `$HOME/.local/bin` is in your `$PATH`
+4. Add your remote token to `$HOME/.miukey`
 
