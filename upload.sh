@@ -2,10 +2,19 @@
 set -eo pipefail
 
 usage() {
-    cat <<USAGE
+    MSG=$(
+        cat <<USAGE
 usage: miupload file1 [file2] [file3] ...
 
 USAGE
+    )
+    if [ -t 0 ]; then
+        printf "%s" "$MSG"
+    else
+        zenity --info --title "MIU Client" \
+            --text="Upload a file to Miu by either opening it with this program or drag and dropping it onto the application icon" \
+            --width 256
+    fi
 }
 
 upload() {
