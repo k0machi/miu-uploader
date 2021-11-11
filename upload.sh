@@ -48,7 +48,7 @@ elif [[ -n "$1" ]]; then
     URL=$(upload "$1")
     if [[ -n "$DISPLAY" ]]; then
         printf "%s" "$URL" | xclip -selection clipboard
-        notify-send "File Uploaded" "<a href=\"$URL\">Click to open the URL</a>"
+        notify-send "File Uploaded" "Uploaded to <u>${URL}</u>"
     else
         printf '%s\n' "$URL"
     fi
