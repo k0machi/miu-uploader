@@ -15,3 +15,11 @@ This small shell script handles uploading files to [MIU](https://i.komachi.sh), 
 3. Make sure your `$HOME/.local/bin` is in your `$PATH`
 4. Add your remote token to `$HOME/.miukey`
 
+## Usage
+
+Either via `miupload` invocation or by drag and drop (or targeted invocation of .desktop file)
+
+```
+miupload myfile.png
+```
+
